@@ -1,0 +1,1236 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;600;700&family=Playfair+Display:ital,wght@600;700&display=swap");
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    color: #3b2030;
+    font-family: "DM Sans", sans-serif;
+    background:
+        radial-gradient(circle at 10% 10%, #ffd9e7, transparent 30%),
+        radial-gradient(circle at 90% 80%, #ddd2ff, transparent 30%),
+        #fff9fc;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* ==================== TOP PROGRESS BAR ==================== */
+
+.bar {
+    position: fixed;
+    z-index: 50;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: #ffffff88;
+}
+
+.bar span {
+    display: block;
+    height: 100%;
+    width: 16%;
+    background: linear-gradient(90deg, #ff6f9b, #9868e8);
+    transition: 0.5s;
+}
+
+/* ==================== SCREENS ==================== */
+
+.screen {
+    display: none;
+    min-height: 100vh;
+    padding: 30px 16px;
+    align-items: center;
+    justify-content: center;
+}
+
+.screen.active {
+    display: flex;
+    animation: in 0.65s ease;
+}
+
+/* ==================== MAIN CARD ==================== */
+
+.glass {
+    width: min(820px, 100%);
+    padding: clamp(28px, 6vw, 64px);
+    text-align: center;
+    background: #ffffffd9;
+    border: 1px solid white;
+    border-radius: 36px;
+    box-shadow: 0 30px 90px #6f345120;
+    backdrop-filter: blur(20px);
+}
+
+.wide {
+    max-width: 980px;
+}
+
+.mini {
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    font-size: 11px;
+    font-weight: 700;
+    color: #d44d79;
+    margin-bottom: 14px;
+}
+
+/* ==================== TEXT ==================== */
+
+h1,
+h2 {
+    font-family: "Playfair Display", serif;
+    line-height: 1.05;
+    margin: 0;
+}
+
+h1 {
+    font-size: clamp(54px, 10vw, 96px);
+}
+
+h2 {
+    font-size: clamp(40px, 7vw, 68px);
+}
+
+h3 {
+    font-family: "Playfair Display", serif;
+    font-size: 28px;
+    margin: 8px 0;
+}
+
+em {
+    color: #ed5f8e;
+}
+
+p {
+    color: #856d79;
+    line-height: 1.7;
+}
+
+/* ==================== BUBU IMAGE ==================== */
+
+.bubu {
+    display: block;
+    width: min(310px, 75vw);
+    max-height: 230px;
+    object-fit: contain;
+    margin: 18px auto 10px;
+    border-radius: 22px;
+}
+
+/* ==================== QUESTIONS ==================== */
+
+.question {
+    font-size: 22px;
+    font-weight: 700;
+    color: #5b3244;
+    margin: 14px 0;
+}
+
+.choices {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+}
+
+/* ==================== BUTTON ==================== */
+
+.btn {
+    border: 0;
+    border-radius: 999px;
+    padding: 15px 23px;
+    background: linear-gradient(135deg, #ff6f9b, #9464dd);
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 12px 30px #d94c7a35;
+    transition: 0.2s;
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+}
+
+.btn.no {
+    background: #fff;
+    color: #c74d75;
+    border: 1px solid #f1c4d3;
+    position: relative;
+}
+
+.hint {
+    font-size: 12px;
+    min-height: 20px;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* =========================================================
+   MAKE YOUR CAKE GAME
+   ========================================================= */
+
+.game-card {
+    padding-bottom: 42px;
+}
+
+.game-wrap {
+    max-width: 620px;
+    margin: 24px auto 0;
+}
+
+.game-hud {
+    display: flex;
+    justify-content: space-between;
+    max-width: 560px;
+    margin: 0 auto 8px;
+    color: #8c6475;
+    font-size: 13px;
+}
+
+.game-hud b {
+    color: #d44d79;
+}
+
+/* ==================== GAME AREA ==================== */
+
+.cake-game {
+    height: 440px;
+    max-width: 560px;
+    margin: auto;
+    position: relative;
+    overflow: hidden;
+    border-radius: 28px;
+    background: linear-gradient(#fff8fb, #f8e9f1);
+    border: 1px solid #f4dce7;
+    box-shadow: inset 0 0 50px #d86a9410;
+    touch-action: none;
+}
+
+.game-line {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 82px;
+    height: 2px;
+    background: #e6c8d6;
+}
+
+/* ==================== FALLING CAKE PIECES ==================== */
+
+.falling-piece {
+    position: absolute;
+    top: -80px;
+    left: calc(50% - 90px);
+    height: 54px;
+    width: 180px;
+    border-radius: 14px 14px 20px 20px;
+    background: linear-gradient(#ffc3d5, #ed83a6);
+    box-shadow: 0 12px 25px #c34f7525;
+    z-index: 4;
+    transition: none;
+}
+
+.falling-piece.piece2 {
+    width: 155px;
+    background: linear-gradient(#ffd2df, #ef93ae);
+}
+
+.falling-piece.piece3 {
+    width: 130px;
+    background: linear-gradient(#ffe0e9, #f0a0b8);
+}
+
+.falling-piece.piece4 {
+    width: 105px;
+    background: linear-gradient(#ffe9f0, #f4b3c8);
+}
+
+/* ==================== CATCHER ==================== */
+
+.catcher {
+    position: absolute;
+    z-index: 5;
+    bottom: 34px;
+    left: calc(50% - 78px);
+    width: 156px;
+    height: 58px;
+    touch-action: none;
+    cursor: grab;
+    user-select: none;
+}
+
+.catcher:active {
+    cursor: grabbing;
+}
+
+.catcher-top {
+    height: 12px;
+    background: #d44d79;
+    border-radius: 12px 12px 5px 5px;
+}
+
+.catcher-body {
+    width: 115px;
+    height: 44px;
+    margin: auto;
+    background: #f5b0c5;
+    border-radius: 0 0 28px 28px;
+    box-shadow: 0 10px 20px #c34f7520;
+}
+
+/* ==================== STACKED CAKE ==================== */
+
+.stack {
+    position: absolute;
+    z-index: 3;
+    bottom: 80px;
+    left: 50%;
+    width: 0;
+    height: 0;
+    pointer-events: none;
+    transform: translateX(0);
+    transition: left 0.05s linear;
+}
+
+.stack-piece {
+    position: absolute;
+    height: 42px;
+    border-radius: 12px 12px 18px 18px;
+    transform: translateX(-50%);
+    background: linear-gradient(#ffc8d8, #ed83a6);
+    box-shadow: 0 6px 12px #c34f7518;
+}
+
+/* ==================== FALLING CANDLE ==================== */
+
+.falling-candle {
+    position: absolute;
+    z-index: 4;
+    top: -90px;
+    left: calc(50% - 14px);
+    width: 28px;
+    height: 70px;
+    background: repeating-linear-gradient(
+        45deg,
+        #fff 0 8px,
+        #ff6f9b 8px 16px
+    );
+    border-radius: 7px;
+    box-shadow: 0 12px 25px #c34f7525;
+}
+
+.falling-candle i {
+    position: absolute;
+    top: -25px;
+    left: 8px;
+    width: 12px;
+    height: 22px;
+    border-radius: 50%;
+    background: #ffb703;
+    box-shadow: 0 0 18px #ffb703;
+    animation: flicker 0.7s infinite alternate;
+}
+
+.falling-candle span {
+    position: absolute;
+    bottom: -6px;
+    left: 4px;
+    width: 20px;
+    height: 8px;
+    background: #fff8fb;
+    border-radius: 50%;
+}
+
+/* ==================== GAME CONTROLS ==================== */
+
+.game-controls {
+    display: flex;
+    justify-content: space-between;
+    max-width: 420px;
+    margin: 7px auto;
+    color: #ad8292;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.message {
+    min-height: 32px;
+    color: #d54e7a;
+    font-weight: 700;
+    margin: 9px 0 12px;
+}
+
+/* =========================================================
+   BLOW CANDLE SECTION
+   ========================================================= */
+
+.blow-stage,
+.knife-stage {
+    margin-top: 20px;
+}
+
+.cake-preview {
+    height: 150px;
+    position: relative;
+}
+
+/* ==================== PREVIEW CAKE ==================== */
+
+.preview-cake {
+    position: relative;
+    width: 190px;
+    height: 110px;
+    margin: 35px auto 0;
+    background: #ed83a6;
+    border-radius: 18px 18px 25px 25px;
+}
+
+.preview-cream {
+    position: absolute;
+    left: 0;
+    top: -18px;
+    width: 190px;
+    height: 38px;
+    background: #fff8fb;
+    border-radius: 50%;
+}
+
+.preview-candle {
+    position: absolute;
+    z-index: 3;
+    left: 80px;
+    top: -75px;
+    width: 30px;
+    height: 70px;
+    background: repeating-linear-gradient(
+        45deg,
+        #fff 0 8px,
+        #ff6f9b 8px 16px
+    );
+    border-radius: 7px;
+    transition: opacity 0.4s ease;
+}
+
+.preview-candle i {
+    position: absolute;
+    top: -25px;
+    left: 9px;
+    width: 12px;
+    height: 22px;
+    border-radius: 50%;
+    background: #ffb703;
+    box-shadow: 0 0 18px #ffb703;
+    animation: flicker 0.7s infinite alternate;
+}
+
+/* ==================== IN-GAME BLOW SLIDER ==================== */
+
+#inGameBlow {
+    position: absolute;
+    z-index: 20;
+    left: 50%;
+    bottom: 12px;
+    transform: translateX(-50%);
+    width: min(430px, 88%);
+    padding: 10px 16px;
+    background: #ffffffee;
+    border: 1px solid #f2cad9;
+    border-radius: 18px;
+    box-shadow: 0 10px 30px #8d3d5b20;
+    backdrop-filter: blur(8px);
+}
+
+.blow-title {
+    color: #d54e7a;
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 6px;
+}
+
+#gameBlowSlider {
+    width: 100%;
+    accent-color: #ed5f8e;
+    cursor: pointer;
+}
+
+.blow-success {
+    color: #d54e7a;
+    font-size: 14px;
+    font-weight: 700;
+    padding: 5px;
+}
+
+/* =========================================================
+   CAKE CUT SECTION
+   ========================================================= */
+
+.cut-cake {
+    height: 150px;
+    width: 260px;
+    margin: auto;
+    position: relative;
+}
+
+/* ==================== CUT CAKE ==================== */
+
+.cut-tier {
+    position: absolute;
+    bottom: 15px;
+    left: 20px;
+    width: 220px;
+    height: 100px;
+    background: linear-gradient(
+        #f7a8c1 0 28%,
+        #ed83a6 28%
+    );
+    border-radius: 18px 18px 24px 24px;
+    transition: transform 0.3s ease;
+}
+
+.cut-cream {
+    position: absolute;
+    z-index: 2;
+    bottom: 90px;
+    left: 20px;
+    width: 220px;
+    height: 40px;
+    background: #fff8fb;
+    border-radius: 50%;
+}
+
+.cut-candle {
+    position: absolute;
+    z-index: 3;
+    left: 115px;
+    top: 10px;
+    width: 30px;
+    height: 65px;
+    background: repeating-linear-gradient(
+        45deg,
+        #fff 0 8px,
+        #ff6f9b 8px 16px
+    );
+    border-radius: 7px;
+}
+
+/* ==================== KNIFE AREA ==================== */
+
+.knife-area {
+    height: 190px;
+    position: relative;
+    max-width: 650px;
+    margin: auto;
+    border-radius: 24px;
+    background: linear-gradient(
+        135deg,
+        #fff8fb,
+        #f8edf3
+    );
+    border: 1px dashed #e4c5d3;
+    touch-action: none;
+    overflow: hidden;
+    user-select: none;
+}
+
+/* ==================== KNIFE ==================== */
+
+.knife {
+    position: absolute;
+    left: 15%;
+    top: 45%;
+    font-size: 50px;
+    transform: rotate(-25deg);
+    cursor: grab;
+    user-select: none;
+    touch-action: none;
+    z-index: 5;
+    transition: transform 0.15s ease;
+}
+
+.knife:active {
+    cursor: grabbing;
+}
+
+/* ==================== SWIPE HINT ==================== */
+
+.slash-hint {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    color: #c18ca0;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    pointer-events: none;
+}
+
+/* ==================== CUT LINE ==================== */
+
+.cut-line {
+    position: absolute;
+    top: 50%;
+    height: 5px;
+    background: #ed5f8e;
+    border-radius: 99px;
+    box-shadow: 0 0 15px #ed5f8e66;
+    transform: rotate(-8deg);
+    transform-origin: left;
+    z-index: 4;
+    animation: cutLineAppear 0.4s ease forwards;
+}
+
+@keyframes cutLineAppear {
+    from {
+        width: 0;
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+/* ==================== CUT CAKE ANIMATION ==================== */
+
+.cut-tier.sliced {
+    animation: sliceCake 0.8s forwards;
+}
+
+/* ==================== KNIFE CUT ANIMATION ==================== */
+
+.knife-cut {
+    animation: knifeCut 0.5s ease forwards;
+}
+
+@keyframes knifeCut {
+    0% {
+        transform: rotate(-25deg) scale(1);
+    }
+
+    45% {
+        transform: rotate(15deg) scale(1.15);
+    }
+
+    100% {
+        transform: rotate(45deg) scale(0);
+        opacity: 0;
+    }
+}
+
+/* ==================== KNIFE TRAIL ==================== */
+
+.knife-trail {
+    position: fixed;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: white;
+    box-shadow:
+        0 0 8px white,
+        0 0 16px #ed5f8e;
+    pointer-events: none;
+    z-index: 99999;
+    transform: translate(-50%, -50%);
+    animation: knifeTrail 0.25s ease forwards;
+}
+
+@keyframes knifeTrail {
+    from {
+        opacity: 1;
+        transform:
+            translate(-50%, -50%)
+            scale(1);
+    }
+
+    to {
+        opacity: 0;
+        transform:
+            translate(-50%, -50%)
+            scale(0);
+    }
+}
+
+/* =========================================================
+   BALLOONS
+   ========================================================= */
+
+.balloons {
+    height: 400px;
+    max-width: 760px;
+    margin: auto;
+    position: relative;
+}
+
+/* ==================== BALLOON ==================== */
+
+.balloon {
+    position: absolute;
+    width: 125px;
+    height: 160px;
+    border: 0;
+    border-radius: 55% 55% 50% 50%;
+    cursor: pointer;
+    filter: drop-shadow(
+        0 18px 16px #3d203018
+    );
+    transition: transform 0.2s ease;
+    user-select: none;
+}
+
+.balloon:hover {
+    transform: scale(1.05);
+}
+
+/* Balloon string */
+
+.balloon::after {
+    content: "";
+    position: absolute;
+    top: 158px;
+    left: 62px;
+    width: 1px;
+    height: 90px;
+    background: #5b3a49;
+}
+
+/* Balloon knot */
+
+.balloon::before {
+    content: "";
+    position: absolute;
+    bottom: -5px;
+    left: 58px;
+    width: 10px;
+    height: 10px;
+    background: inherit;
+    transform: rotate(45deg);
+}
+
+/* Balloon shine */
+
+.balloon i {
+    position: absolute;
+    left: 20px;
+    top: 20px;
+    width: 17px;
+    height: 62px;
+    border-radius: 50%;
+    background: #ffffff45;
+    transform: rotate(30deg);
+}
+
+/* ==================== BALLOON POSITIONS ==================== */
+
+.a {
+    left: 7%;
+    top: 25px;
+    background: #ff6f91;
+}
+
+.b {
+    right: 7%;
+    top: 20px;
+    background: #9b67e4;
+}
+
+.c {
+    left: 28%;
+    bottom: 18px;
+    background: #20b9d0;
+}
+
+.d {
+    right: 28%;
+    bottom: 5px;
+    background: #ef9be6;
+}
+
+/* ==================== BALLOON POP ==================== */
+
+.popped {
+    animation: pop 0.35s forwards;
+    pointer-events: none;
+}
+
+/* =========================================================
+   MEMORY / PHOTOS
+   ========================================================= */
+
+.memory {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    margin: 25px 0;
+}
+
+.photo {
+    width: min(600px, 70vw);
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    border-radius: 24px;
+    position: relative;
+    background: #f3dce6;
+    box-shadow: 0 20px 50px #5b293d18;
+}
+
+.photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.caption {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 30px 18px 15px;
+    text-align: left;
+    color: #fff;
+    background: linear-gradient(
+        transparent,
+        #21101dbd
+    );
+}
+
+.caption small,
+.caption strong {
+    display: block;
+}
+
+.caption small {
+    font-size: 10px;
+    opacity: 0.8;
+}
+
+.caption strong {
+    margin-top: 4px;
+}
+
+/* ==================== PHOTO ARROWS ==================== */
+
+.arrow {
+    width: 45px;
+    height: 45px;
+    border: 0;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: 0 8px 22px #4b203318;
+    color: #d54e7a;
+    font-size: 32px;
+    cursor: pointer;
+}
+
+.arrow:hover {
+    transform: scale(1.08);
+}
+
+/* ==================== PHOTO DOTS ==================== */
+
+.dots {
+    display: flex;
+    gap: 7px;
+    justify-content: center;
+    margin-bottom: 22px;
+}
+
+.dot {
+    width: 7px;
+    height: 7px;
+    background: #d9bdca;
+    border-radius: 50%;
+}
+
+.dot.on {
+    background: #ed5f8e;
+    transform: scale(1.4);
+}
+
+/* =========================================================
+   BOUQUET
+   ========================================================= */
+
+.bouquet {
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+    font-size: 58px;
+    letter-spacing: -10px;
+    transition: 0.4s;
+    margin: 20px;
+}
+
+.bouquet span {
+    display: inline-block;
+    transform: scale(1.5);
+    margin: 0 8px;
+}
+
+.bouquet.open {
+    transform: scale(1.25) rotate(-3deg);
+}
+
+/* =========================================================
+   CHAT SECTION
+   ========================================================= */
+
+.chats {
+    display: grid;
+    gap: 10px;
+    max-width: 650px;
+    margin: 15px auto 25px;
+}
+
+.chats div {
+    padding: 14px 18px;
+    background: #fff5f9;
+    border-radius: 16px;
+    text-align: left;
+    color: #755262;
+    font-size: 14px;
+    animation: in 0.5s ease;
+}
+
+.chats b {
+    color: #d34d79;
+}
+
+/* =========================================================
+   MESSAGE BOX
+   ========================================================= */
+
+.messageBox {
+    width: 180px;
+    height: 140px;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+    position: relative;
+    margin: 10px;
+}
+
+.boxbody {
+    display: grid;
+    place-items: center;
+    width: 180px;
+    height: 95px;
+    background: #f08aaa;
+    border-radius: 10px;
+    color: white;
+    font-weight: 700;
+    box-shadow: 0 18px 35px #d94c7a35;
+}
+
+.lid {
+    position: absolute;
+    z-index: 2;
+    top: 10px;
+    left: 0;
+    width: 180px;
+    height: 35px;
+    background: #db6688;
+    border-radius: 9px;
+    display: grid;
+    place-items: center;
+    transition: 0.7s;
+}
+
+.messageBox.open .lid {
+    transform: translateY(-75px) rotate(-8deg);
+}
+
+/* =========================================================
+   FINAL LETTER
+   ========================================================= */
+
+.letterText {
+    max-width: 680px;
+    margin: 10px auto;
+}
+
+.letterText h2 {
+    font-size: clamp(34px, 6vw, 52px);
+}
+
+.typed-message {
+    min-height: 210px;
+    text-align: left;
+    white-space: pre-wrap;
+    color: #755262;
+    font-size: 17px;
+    line-height: 1.9;
+    margin-top: 24px;
+}
+
+.cursor {
+    color: #d44d79;
+    font-weight: 700;
+    animation: blink 0.7s infinite;
+}
+
+.signature {
+    margin-top: 24px;
+    color: #755262;
+    font-family: "Playfair Display";
+    font-style: italic;
+}
+
+.signature b {
+    color: #d44d79;
+}
+
+.letterCard {
+    max-width: 760px;
+}
+
+.replay {
+    margin-top: 20px;
+}
+
+/* =========================================================
+   GENERAL ANIMATIONS
+   ========================================================= */
+
+@keyframes in {
+    from {
+        opacity: 0;
+        transform: translateY(18px);
+    }
+
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+@keyframes flicker {
+    to {
+        transform:
+            scale(1.15)
+            translateY(-3px);
+    }
+}
+
+@keyframes pop {
+    0% {
+        transform: scale(1);
+    }
+
+    35% {
+        transform: scale(1.2);
+    }
+
+    60% {
+        transform: scale(1.35);
+        opacity: 0.5;
+    }
+
+    100% {
+        transform: scale(0);
+        opacity: 0;
+    }
+}
+
+@keyframes float {
+    to {
+        transform:
+            translateY(-220px)
+            rotate(25deg);
+        opacity: 0;
+    }
+}
+
+@keyframes blink {
+    50% {
+        opacity: 0;
+    }
+}
+
+@keyframes sliceCake {
+    0% {
+        transform:
+            translateX(0)
+            rotate(0);
+    }
+
+    50% {
+        transform:
+            translateX(-7px)
+            rotate(-2deg);
+    }
+
+    100% {
+        transform:
+            translateX(7px)
+            rotate(2deg);
+        opacity: 0.55;
+    }
+}
+
+/* =========================================================
+   RESPONSIVE / MOBILE
+   ========================================================= */
+
+@media (max-width: 600px) {
+    .glass {
+        border-radius: 26px;
+        padding: 28px 16px;
+    }
+
+    .cake-game {
+        height: 390px;
+    }
+
+    .falling-piece {
+        height: 48px;
+    }
+
+    .catcher {
+        width: 145px;
+        left: calc(50% - 72px);
+    }
+
+    .catcher-body {
+        width: 105px;
+    }
+
+    .game-controls {
+        max-width: 95%;
+    }
+
+    .game-hud {
+        max-width: 95%;
+    }
+
+    .balloon {
+        width: 90px;
+        height: 120px;
+    }
+
+    .balloon::after {
+        top: 118px;
+    }
+
+    .balloon::before {
+        left: 41px;
+    }
+
+    .balloon i {
+        left: 15px;
+        top: 15px;
+        width: 13px;
+        height: 45px;
+    }
+
+    .balloons {
+        height: 330px;
+    }
+
+    .a {
+        left: 5%;
+    }
+
+    .b {
+        right: 5%;
+    }
+
+    .c {
+        left: 6%;
+        bottom: 18px;
+    }
+
+    .d {
+        right: 6%;
+        bottom: 5px;
+    }
+
+    .photo {
+        width: 70vw;
+    }
+
+    .arrow {
+        width: 40px;
+        height: 40px;
+        font-size: 28px;
+    }
+
+    .choices {
+        flex-wrap: wrap;
+    }
+
+    .typed-message {
+        font-size: 15px;
+    }
+
+    .knife-area {
+        height: 160px;
+    }
+
+    .knife {
+        font-size: 42px;
+    }
+
+    .cut-cake {
+        transform: scale(0.9);
+    }
+
+    .slider {
+        width: 95%;
+    }
+}
+
+/* =========================================================
+   VERY SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 380px) {
+    h1 {
+        font-size: 48px;
+    }
+
+    h2 {
+        font-size: 36px;
+    }
+
+    .cake-game {
+        height: 360px;
+    }
+
+    .balloons {
+        height: 300px;
+    }
+
+    .balloon {
+        width: 78px;
+        height: 105px;
+    }
+
+    .balloon::after {
+        top: 103px;
+    }
+
+    .balloon::before {
+        left: 35px;
+    }
+
+    .balloon i {
+        left: 12px;
+        top: 12px;
+        width: 11px;
+        height: 38px;
+    }
+
+    .knife-area {
+        height: 145px;
+    }
+}

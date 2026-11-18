@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Happy Birthday Nikita 💗</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="confetti"></div><div class="bar"><span id="bar"></span></div>
+<main>
+<section class="screen active" id="welcome"><div class="glass hero">
+<div class="mini">A tiny birthday adventure</div><h1>Happy Birthday<br><em>Nikita</em> 🎂</h1>
+<img class="bubu" src="bubunew.jpg" alt="Bubu and Dudu celebrating">
+<p class="question">Are you excited?</p><div class="choices"><button id="yes" class="btn">YES 💗</button><button id="no" class="btn no">NO 🙈</button></div>
+<p id="noText" class="hint">Choose wisely… 😌</p></div></section>
+
+<section class="screen" id="cake"><div class="glass wide game-card">
+<div class="mini">Chapter 01 · Make Your Cake</div><h2>Make Your Cake 🎂</h2>
+<p>Catch each falling layer and build the cake from the bottom up.</p>
+<div class="game-wrap">
+  <div class="game-hud"><span>Layer <b id="layerNo">1</b> / 4</span><span>Score <b id="score">0</b></span></div>
+  <div id="cakeGame" class="cake-game">
+    <div class="game-line"></div>
+    <div id="fallingPiece" class="falling-piece tier-piece piece1"></div>
+    <div id="catcher" class="catcher"><div class="catcher-top"></div><div class="catcher-body"></div></div>
+    <div id="stack" class="stack"></div>
+    <div id="candlePiece" class="falling-candle hidden"><i></i><span></span></div>
+  </div>
+  <div class="game-controls"><span>← Move</span><span>Move →</span></div>
+  <div id="gameMsg" class="message">Move the base under the falling cake layer.</div>
+  <button id="startGame" class="btn">Start Building 🎂</button>
+</div>
+<div id="blowStage" class="blow-stage hidden">
+  <div class="cake-preview"><div class="preview-cake"><div class="preview-candle"><i></i></div><div class="preview-cream"></div></div></div>
+  <h3>Perfect. Now make a wish.</h3><p>Slide all the way to blow the candle.</p>
+  <div class="slider"><span>SLIDE TO BLOW THE CANDLE →</span><input id="blow" type="range" min="0" max="100" value="0"></div>
+  <div id="blowMsg" class="message">The flame is waiting…</div>
+</div>
+<div id="knifeStage" class="knife-stage hidden">
+  <div class="cut-cake"><div class="cut-candle"></div><div class="cut-cream"></div><div class="cut-tier"></div></div>
+  <p>One last move. Swipe across the cake like Fruit Ninja.</p>
+  <div id="knifeArea" class="knife-area"><div id="knife" class="knife">🔪</div><div class="slash-hint">SWIPE ACROSS THE CAKE</div></div>
+  <div id="cutMsg" class="message">Drag the knife from left to right.</div>
+</div>
+<button id="cakeNext" class="btn hidden">Continue →</button>
+</div></section>
+
+<section class="screen" id="balloons"><div class="glass wide"><div class="mini">Chapter 02 · Four little secrets</div>
+<h2>Pop them one by one 🎈</h2><p>Each balloon has a little message for you.</p><div class="balloons">
+<button class="balloon a" data-m="I like the way even normal conversations with you somehow become memorable."><i></i></button>
+<button class="balloon b" data-m="You have this very particular way of making a day feel less ordinary."><i></i></button>
+<button class="balloon c" data-m="Some people are easy to talk to. With you, it feels natural."><i></i></button>
+<button class="balloon d" data-m="I hope this year gives you more moments that feel exactly like you wanted them to."><i></i></button>
+</div><div id="bmsg" class="message">4 surprises are waiting…</div><button id="balloonNext" class="btn hidden">Go to the Memories →</button></div></section>
+
+<section class="screen" id="memories"><div class="glass wide"><div class="mini">Chapter 03 · The five memories</div>
+<h2>Five little memories 📸</h2><p>Some moments deserve to be kept forever.</p><div class="memory"><button id="prev" class="arrow">‹</button><div class="photo"><img id="photo" src="photos/photo1.jpg"><div class="caption"><small id="count">01 / 05</small><strong id="pcap"></strong></div></div><button id="next" class="arrow">›</button></div>
+<div id="dots" class="dots"></div><button id="memNext" class="btn">Open the Bouquet 💐 →</button></div></section>
+
+<section class="screen" id="bouquet"><div class="glass bouquetCard"><div class="mini">Chapter 04 · A little bouquet</div>
+<h2>For someone special 💐</h2><p>Tap the bouquet and let the messages appear one at a time.</p>
+<button id="bouquetBtn" class="bouquet">🌷🌹🌸<span>💐</span>🌸🌹🌷</button>
+<div id="chats" class="chats hidden">
+<div>There are people you talk to because you have to. <b>And then there are people you talk to because you want to.</b></div>
+<div>Some conversations disappear from the chat history. <b>Some stay somewhere else.</b></div>
+<div>I don't need a perfect reason to remember a moment. <b>Sometimes the moment itself is enough.</b></div>
+<div>Today is your birthday, so I get to say it plainly: <b>I'm really glad you exist.</b></div>
+<div>And yes, you deserve the good things you're quietly hoping for. <b>More than you probably admit.</b></div>
+<div>Keep the people who make you feel like yourself. <b>And keep being that person too.</b></div>
+</div><button id="surpriseBtn" class="btn hidden">One Last Thing →</button></div></section>
+
+<section class="screen" id="letter"><div class="glass letterCard"><div class="mini">Final surprise · A message for you</div>
+<button id="box" class="messageBox"><span class="lid">💌</span><span class="boxbody">OPEN ME</span></button>
+<div id="letterText" class="letterText hidden">
+<h2>Happy Birthday<br><em>— and take your time reading this.</em></h2>
+<div id="typedMessage" class="typed-message"></div><span id="cursor" class="cursor">|</span>
+<div id="signature" class="signature hidden">— Someone who wanted your birthday to feel a little less ordinary. 💗</div>
+</div>
+<button id="replay" class="btn hidden">Replay the whole journey ↺</button></div></section>
+</main>
+<script src="script.js"></script>
+</body></html>
